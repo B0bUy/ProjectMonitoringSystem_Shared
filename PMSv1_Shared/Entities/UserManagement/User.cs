@@ -6,7 +6,7 @@ namespace PMS_Serverv1.Entities.UserManagement
     public class User : BaseEntity
     {
         [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; } = Guid.Empty;
         [Required]
         public string Username { get; set; } = string.Empty;
         [Required]
