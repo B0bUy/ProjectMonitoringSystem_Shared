@@ -3,7 +3,6 @@ using PMS_Serverv1.Entities.Contracts;
 using PMS_Serverv1.Entities.UserManagement;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
 
 namespace PMS_Serverv1.Entities.Models
 {
@@ -29,6 +28,8 @@ namespace PMS_Serverv1.Entities.Models
         [Required]
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; } = null;
+        public DateTime? TimeLineStart { get; set; } = null;
+        public DateTime? TimeLineEnd { get; set; } = null;
         public DateTime? Deadline { get; set; } = null;
     }
 
@@ -51,10 +52,12 @@ namespace PMS_Serverv1.Entities.Models
         public Guid ProjectId { get; set; } = Guid.Empty;
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
-        public Department Department { get; set; }
         public Guid? StatusId { get; set; } = Guid.Empty;
         [ForeignKey("StatusId")]
         public Status Status { get; set; }
+        public Guid ClientId { get; set; } = Guid.Empty;
+        [ForeignKey("ClientId")]
+        public User Client { get; set; }
     }
 
     [Index(nameof(Name))]
@@ -62,8 +65,10 @@ namespace PMS_Serverv1.Entities.Models
     {
         [Key]
         public Guid StatusId { get; set; } = Guid.NewGuid();
+        public int StatusType { get; set; } = 0;
         [Required]
         public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; } = string.Empty;
         public string Color { get; set; } = string.Empty;
     }
 
@@ -96,9 +101,11 @@ namespace PMS_Serverv1.Entities.Models
         public Guid? DepartmentId { get; set; } = null;
         [ForeignKey("DepartmentId")]
         public Department Department { get; set; }
+        public DateTime? TimeLineStart { get; set; } = null;
+        public DateTime? TimeLineEnd { get; set; } = null;
         public DateTime? Deadline { get; set; } = null;
     }
-     
+
     public class UserTask : BaseEntity
     {
         [Key]
@@ -111,12 +118,53 @@ namespace PMS_Serverv1.Entities.Models
         public User User { get; set; }
     }
 
-    public class TaskMovement : BaseEntity
+    public class ItemHistory : BaseEntity
     {
         [Key]
-        public Guid TaskMovementId { get; set; } = Guid.NewGuid();
-        public Guid TaskStatusId { get; set; } = Guid.Empty;
+        public Guid ItemHistoryId { get; set; } = Guid.NewGuid();
+        public Guid? ProjectId { get; set; } = Guid.Empty;
+        [ForeignKey("ProjectId")]
+        public Project Project { get; set; }
+        public Guid? TaskId { get; set; } = Guid.Empty;
         [ForeignKey("TaskId")]
         public Task Task { get; set; }
+        public Guid? DepartmentId { get; set; } = Guid.Empty;
+        [ForeignKey("DepartmentId")]
+        public Department Department { get; set; }
+        public Guid? StatusId { get; set; } = Guid.Empty;
+        [ForeignKey("StatusId")]
+        public Status Status { get; set; }
+        public Guid? UserId { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
+        public int Movement { get; set; } = 0;
+        public DateTime MovedAt { get; set; } = DateTime.Now;
+        public Guid MovedBy { get; set; } = Guid.Empty;
+    }
+
+    public class Client : BaseEntity
+    {
+        [Key]
+        public Guid ClientId { get; set; } = Guid.NewGuid();
+        [Required]
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; } = null;
+        public string? Logo { get; set; } = null;
+        public string? Color { get; set; } = string.Empty;
+    }
+
+    public class ClientInclusion : BaseEntity
+    {
+        [Key]
+        public Guid ClientInclusionId { get; set; } = Guid.NewGuid();
+        public Guid? ClientId { get; set; } = Guid.Empty;
+        [ForeignKey("ClientId")]
+        public Client Client { get; set; }
+        public Guid ProjectId { get; set; } = Guid.Empty;
+        [ForeignKey("ProjectId")]
+        public Project Project { get; set; }
+        public Guid? PackageId { get; set; } = Guid.Empty;
+        [ForeignKey("PackageId")]
+        public Package Package { get; set; }
     }
 }
