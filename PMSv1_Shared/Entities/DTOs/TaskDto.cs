@@ -10,6 +10,8 @@ namespace PMSv1_Shared.Entities.DTOs
         public Guid? ParentTaskId { get; set; } = null;
         public Guid? ProjectId { get; set; } = null;
         public Guid? DepartmentId { get; set; } = null;
+        public DateTime? TimeLineStart { get; set; } = null;
+        public DateTime? TimeLineEnd { get; set; } = null;
         public DateTime? Deadline { get; set; } = null;
     }
 

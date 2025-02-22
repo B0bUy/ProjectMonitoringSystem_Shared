@@ -158,10 +158,10 @@ namespace PMSv1_Shared.Entities.Models
     {
         [Key]
         public Guid ClientInclusionId { get; set; } = Guid.NewGuid();
-        public Guid? ClientId { get; set; } = Guid.Empty;
+        public Guid ClientId { get; set; } = Guid.Empty;
         [ForeignKey("ClientId")]
         public Client Client { get; set; }
-        public Guid ProjectId { get; set; } = Guid.Empty;
+        public Guid? ProjectId { get; set; } = Guid.Empty;
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
         public Guid? PackageId { get; set; } = Guid.Empty;
