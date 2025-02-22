@@ -1,7 +1,7 @@
-﻿using PMS_Serverv1.Entities.Contracts;
+﻿using PMSv1_Shared.Entities.Contracts;
 using System.ComponentModel.DataAnnotations;
 
-namespace PMS_Serverv1.Entities.UserManagement
+namespace PMSv1_Shared.Entities.UserManagement
 {
     public class User : BaseEntity
     {

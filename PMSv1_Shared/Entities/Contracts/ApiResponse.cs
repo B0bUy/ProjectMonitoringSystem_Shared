@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PMSv1_Shared.Entities.Contracts
+﻿namespace PMSv1_Shared.Entities.Contracts
 {
     public class ApiResponse<T>
     {

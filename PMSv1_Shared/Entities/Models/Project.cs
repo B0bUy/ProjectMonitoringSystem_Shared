@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PMS_Serverv1.Entities.Contracts;
-using PMS_Serverv1.Entities.UserManagement;
+using PMSv1_Shared.Entities.Contracts;
+using PMSv1_Shared.Entities.UserManagement;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PMS_Serverv1.Entities.Models
+namespace PMSv1_Shared.Entities.Models
 {
     [Index(nameof(Name), nameof(Description))]
     public class Package : BaseEntity
@@ -78,14 +78,14 @@ namespace PMS_Serverv1.Entities.Models
         public Guid TaskStatusId { get; set; } = Guid.NewGuid();
         public Guid TaskId { get; set; } = Guid.Empty;
         [ForeignKey("TaskId")]
-        public Task Task { get; set; }
+        public Tasks Task { get; set; }
         public Guid StatusId { get; set; } = Guid.Empty;
         [ForeignKey("StatusId")]
         public Status Status { get; set; }
     }
 
     [Index(nameof(Name), nameof(Description), nameof(Deadline))]
-    public class Task : BaseEntity
+    public class Tasks : BaseEntity
     {
         [Key]
         public Guid TaskId { get; set; } = Guid.NewGuid();
@@ -94,7 +94,7 @@ namespace PMS_Serverv1.Entities.Models
         public string? Description { get; set; } = null;
         public Guid? ParentTaskId { get; set; } = null;
         [ForeignKey("ParentTaskId")]
-        public Task ParentTask { get; set; }
+        public Tasks ParentTask { get; set; }
         public Guid? ProjectId { get; set; } = null;
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
@@ -103,7 +103,8 @@ namespace PMS_Serverv1.Entities.Models
         public Department Department { get; set; }
         public DateTime? TimeLineStart { get; set; } = null;
         public DateTime? TimeLineEnd { get; set; } = null;
-        public DateTime? Deadline { get; set; } = null;
+        public DateTime? Deadline { get; set; } = null; 
+
     }
 
     public class UserTask : BaseEntity
@@ -112,7 +113,7 @@ namespace PMS_Serverv1.Entities.Models
         public Guid UserTaskId { get; set; } = Guid.NewGuid();
         public Guid TaskId { get; set; } = Guid.Empty;
         [ForeignKey("TaskId")]
-        public Task Task { get; set; }
+        public Tasks Task { get; set; }
         public Guid UserId { get; set; } = Guid.Empty;
         [ForeignKey("UserId")]
         public User User { get; set; }
@@ -127,7 +128,7 @@ namespace PMS_Serverv1.Entities.Models
         public Project Project { get; set; }
         public Guid? TaskId { get; set; } = Guid.Empty;
         [ForeignKey("TaskId")]
-        public Task Task { get; set; }
+        public Tasks Task { get; set; }
         public Guid? DepartmentId { get; set; } = Guid.Empty;
         [ForeignKey("DepartmentId")]
         public Department Department { get; set; }

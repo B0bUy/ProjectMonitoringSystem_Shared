@@ -1,4 +1,4 @@
-﻿using PMS_Serverv1.Entities.Contracts;
+﻿using PMSv1_Shared.Entities.Contracts;
 
 namespace PMSv1_Shared.Entities.DTOs
 {

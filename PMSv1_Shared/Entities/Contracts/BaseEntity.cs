@@ -1,4 +1,4 @@
-﻿namespace PMS_Serverv1.Entities.Contracts
+﻿namespace PMSv1_Shared.Entities.Contracts
 {
     public class BaseEntity
     {
