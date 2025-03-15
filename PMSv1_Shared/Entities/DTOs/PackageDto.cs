@@ -36,7 +36,7 @@ namespace PMSv1_Shared.Entities.DTOs
 
     public class ClientDto : BaseEntity
     {
-        public Guid ClientId { get; set; } = Guid.NewGuid();
+        public Guid ClientId { get; set; } = Guid.Empty;
         [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; } = null;
